@@ -1,0 +1,15 @@
+node_modules/
+screenshot.jpg
+.env
+package-lock.json
+README.md
+requirements.txt
+client_secrets.json
+youtubeEnv
+scraperEnv
+shortGPT
+screenshots
+productInformation
+downloads
+upload_video.py-oauth2.json
+screenshot.jpg

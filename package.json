@@ -1,0 +1,21 @@
+{
+  "name": "scrape-anything---web-ai-agent",
+  "version": "1.0.0",
+  "description": "",
+  "main": "screenshot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "google-search-results-nodejs": "^2.1.0",
+    "http": "^0.0.1-security",
+    "openai": "^4.24.6",
+    "puppeteer": "^21.5.2",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "request": "^2.88.2"
+  }
+}
