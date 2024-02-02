@@ -1,4 +1,20 @@
- async function highlight_links(page) {
+
+/**
+ * Highlights all clickable elements on a web page and marks them with a custom attribute.
+ * This function will iterate over all anchor tags, buttons, inputs, textareas, and elements
+ * with a role of button or treeitem. It removes a specific attribute (`gpt-link-text`) if present,
+ * outlines visible and interactable elements with a red border, and sets a `gpt-link-text` attribute
+ * with a sanitized version of the element's text content. This is useful for visually identifying
+ * clickable elements and potentially for further processing or testing scenarios.
+ *
+ * @async
+ * @param {object} page - The Puppeteer page object representing the web page to interact with.
+ * @returns {Promise<void>} A promise that resolves when the operation completes, marking all identified
+ *                          clickable elements with a red border and a `gpt-link-text` attribute.
+ */
+
+
+async function highlight_links(page) {
     await page.evaluate(() => {
         document.querySelectorAll('[gpt-link-text]').forEach(e => {
             e.removeAttribute("gpt-link-text");

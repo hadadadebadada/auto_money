@@ -1,3 +1,19 @@
+/**
+ * Asynchronously creates an affiliate video by navigating a web page, interacting with specific elements, and submitting product details.
+ * This function takes a screenshot of the full page initially, then performs a series of actions such as clicking a specific element, 
+ * typing text into a textarea, and submitting the final story for the affiliate video. It handles waiting for elements to appear, typing 
+ * with delays, and capturing screenshots at various stages of the process.
+ * 
+ * @param {object} page - The Puppeteer page object to interact with.
+ * @param {object} productDetails - An object containing details about the product for which the affiliate video is being created.
+ * 
+ * @throws Will throw an error if the 'ShortGPT Stock Video Option' button is not found within the specified timeout or if the textarea
+ * for inputting the video script is not found.
+ * 
+ * @example
+ * // Assuming 'page' is a Puppeteer page instance and 'productDetails' is an object with product information
+ * await createAffiliateVideo(page, { productName: "Example Product", price: "$19.99", discount: "10%" });
+ */ 
  async function createAffiliateVideo(page, productDetails){
     await page.screenshot({ path: 'shortGPT/1_navigated.jpg', fullPage: true });
 
@@ -51,6 +67,8 @@
 
 
         const productDetailsString = JSON.stringify(productDetails);
+
+        console.log("productDetails: ", productDetails)
         // Typing the story command
         console.log(`4..... generating story for  ${productDetailsString}: `)
 

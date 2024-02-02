@@ -1,6 +1,20 @@
 const OpenAI = require('openai');
 const openai = new OpenAI();
 const { trimTitle } = require('../utils/trimTitle.js');
+const { spawn } = require('child_process');
+
+
+
+/**
+ * Executes a Python script using a specified virtual environment's Python interpreter.
+ * This function spawns a child process to run the Python script with the provided arguments.
+ * It logs the standard output and standard error streams to the console and reports the exit
+ * code of the child process upon completion. This function is designed to integrate Python
+ * scripts into a Node.js application, allowing for inter-language communication and script execution.
+ *
+ * @param {string} script - The path to the Python script to be executed.
+ * @param {Array<string>} args - An array of arguments to be passed to the Python script.
+ */
 
 function runPythonScript(script, args) {
     // Path to the Python interpreter in the virtual environment
@@ -23,10 +37,20 @@ function runPythonScript(script, args) {
         console.log(`child process exited with code ${code}`);
     });
 }
-
+/**
+ * Fetches generated content for a YouTube video's description and tags based on product details.
+ * This function utilizes the OpenAI API to generate a video description and tags that highlight
+ * the product's key features and benefits. It prepares a prompt to generate marketing content
+ * focusing on psychological strategies for creating engaging YouTube shorts. The function then
+ * prepares and runs a Python script to upload the video with the generated description and tags
+ * to YouTube. It handles multiple Python script executions for redundancy or additional processing.
+ *
+ * @async
+ * @param {object} productDetails - An object containing details of the product for which the YouTube video is made.
+ * @param {string} downloadPath - The file path where the video for upload is located.
+ */
 
 async function fetchChatCompletions(productDetails, downloadPath) {
-
 
 
     let promptTemplate = "Assume you are a marketing expert specializing in YouTube short videos. Your role involves understanding and leveraging psychological principles to enhance viewer engagement and retention. Discuss strategies for creating captivating YouTube shorts, focusing on psychological aspects such as the attention span of viewers, the role of emotions in content engagement, and the use of storytelling to make content more relatable and memorable. Provide insights on how these psychological elements can be applied to different genres of content, like educational, entertainment, and lifestyle. Also, include tips on optimizing video titles and descriptions for maximum impact and viewer curiosity. Finally, address the importance of understanding audience demographics and preferences to tailor content effectively."
@@ -67,8 +91,13 @@ async function fetchChatCompletions(productDetails, downloadPath) {
 
 
 
-    const script = "../../upload_video.py";
+    const script = "../../../upload_video.py";
     runPythonScript(script, args);
+
+
+    console.log("second try to call the script")
+    const script2 = "/home/brate/Dev/clean_youtube_uploader (copy)/upload_video.py";
+    runPythonScript(script2, args);
 
 
 }

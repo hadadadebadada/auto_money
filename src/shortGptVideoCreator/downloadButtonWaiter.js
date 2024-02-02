@@ -1,4 +1,18 @@
- async function waitForDownloadButton(page, downloadButtonSelector, context) {
+/**
+ * Waits for a download button to become ready on a web page, taking periodic screenshots while waiting.
+ * This function is designed to monitor the availability of a specified download button and capture screenshots
+ * at regular intervals during the wait time. If the download button becomes ready within the allotted time,
+ * it captures a screenshot indicating readiness and updates the context object to reflect success.
+ *
+ * @async
+ * @param {object} page - The Puppeteer page object representing the web page to interact with.
+ * @param {string} downloadButtonSelector - The CSS selector for the download button to wait for.
+ * @param {object} context - An object to store the state of the download process, updated with the success status.
+ * @throws Will throw an error if the download button does not appear within the specified maximum wait time.
+ * @returns {Promise<void>} A promise that resolves when the function completes, either when the download button is found
+ *                          or the maximum wait time is exceeded.
+ */
+async function waitForDownloadButton(page, downloadButtonSelector, context) {
     const maxWaitTime = 2400000; // 40 minutes
     const screenshotInterval = 300000; // 5 minutes
     const startTime = Date.now();

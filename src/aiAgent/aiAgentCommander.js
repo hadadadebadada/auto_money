@@ -5,7 +5,25 @@ const timeout = 5000;
 const OpenAI = require('openai');
 const openai = new OpenAI();
 
-
+/**
+ * Utilizes an AI agent to navigate and interact with web pages based on instructions provided.
+ * This function orchestrates a series of tasks to instruct the AI agent, such as navigating to URLs,
+ * clicking links based on visible text, and performing searches. It leverages a combination of Puppeteer
+ * for web page interaction and OpenAI's GPT model for understanding and generating instructions.
+ * The AI agent's actions are based on screenshots of the current web page state, which are converted to
+ * base64 images and sent to the AI for analysis. The AI provides instructions on what actions to take next,
+ * including clicking links or navigating to new pages, which are then executed using Puppeteer.
+ *
+ * @async
+ * @param {string} command - The initial command or question posed to the AI agent for navigating or interacting with the webpage.
+ * @param {object} page - The Puppeteer page object representing the web page to interact with.
+ * @returns {Promise<void>} This function does not return a value but executes a series of asynchronous operations
+ *                          to interact with web pages based on AI-generated instructions.
+ * @description This function is designed to facilitate complex web navigation and interaction tasks by combining
+ *              AI-generated instructions with automated browser actions. It demonstrates advanced use cases of
+ *              integrating AI with web automation tools to perform tasks that require understanding of webpage content
+ *              and context-sensitive actions.
+ */
 async function useAiAgent(command, page) {
     const messages = [
         {
