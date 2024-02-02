@@ -23,6 +23,18 @@ function trimTitleToMaxLength(title, maxLength) {
  * @param {string} folderPath - The path to the folder containing the video and product details JSON file.
  */
 function runPythonScript(script, folderPath) {
+
+    console.log("\u001b[0;34m###########################################");
+    console.log("# WEB AI AGENT RPA by \u001b[0;31mHadadadebadada\u001b[0m #");
+    console.log("\u001b[0;34m###########################################");
+    
+    // Example usage in a terminal-like environment (not directly applicable in web console)
+    console.log("\u001b[0;34mIf you're reading this, you've been in a coma for almost 20 years now. We're trying a new technique. We don't know where this message will end up in your dream, but we hope it works. Please wake up, we miss you.\u001b[0m");
+
+
+
+
+
     // Read the JSON file
     const jsonFilePath = path.join(folderPath, 'productDetails.json');
     const productDetails = JSON.parse(fs.readFileSync(jsonFilePath, 'utf8'));
@@ -55,7 +67,7 @@ function runPythonScript(script, folderPath) {
     console.log(`Running Python script with virtual environment: ${script}`);
     console.log("Arguments:", args);
 
-    const venvPythonPath = '/home/brate/Dev/Scrape-anything---Web-AI-agent/youtubeEnv/bin/python';
+    const venvPythonPath = path.resolve(__dirname, '../../', 'youtubeEnv', 'bin', 'python');
     const pythonProcess = spawn(venvPythonPath, [script, ...args]);
 
     pythonProcess.stdout.on('data', (data) => {
@@ -70,7 +82,7 @@ function runPythonScript(script, folderPath) {
         console.log(`child process exited with code ${code}`);
     });
 }
+  const scriptPath = path.resolve(__dirname, '../../', 'upload_video.py');
 
-// Example usage
-const folderPath = '/home/brate/Dev/clean_youtube_uploader/productInformation/TEST_PRODUCT';
-runPythonScript("../../upload_video.py", folderPath);
+const folderPath = '/home/brate/Dev/clean_youtube_uploader (copy)/productInformation/ASUS_Zenbook_Laptops___All_Models';
+runPythonScript(scriptPath, folderPath);

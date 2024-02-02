@@ -9,7 +9,7 @@ const { createAffiliateVideo } = require('./src/shortGptVideoCreator/affiliateVi
 const { fetchChatCompletions } = require('./src/openAiApiRunner/videoContentGenerator.js');
 const { generateProductSuggestions } = require('./src/serpApiRunner/serpProductSuggestionGenerator.js');
 const { loginToAmazon } = require('./src/amazonAgent/amazonAgentCommander.js');
-const {downloadAffiliateVideo} = require('./src/shortGptVideoCreator/affiliateVideoDownloader.js');
+const { downloadAffiliateVideo } = require('./src/shortGptVideoCreator/affiliateVideoDownloader.js');
 
 /**
  * This script automates the process of creating and uploading affiliate videos to YouTube using Puppeteer, OpenAI's GPT, and other utilities. It performs tasks such as logging into Amazon, extracting product details, generating video content, and managing video downloads. The script aims to automate the entire workflow for affiliate marketing through YouTube videos.
@@ -32,14 +32,7 @@ const {downloadAffiliateVideo} = require('./src/shortGptVideoCreator/affiliateVi
  * Note: Modify the `successfulRuns === 1` check to change the number of videos processed before pausing, and adjust the sleep timeout as needed to fit the desired pause duration.
  */
 
-
 async function processProduct(product, context) {
-
-    console.log("###########################################");
-    console.log("# WEB AI AGENT RPA by Hadadadebadada #");
-    console.log("###########################################\n");
-
-
     //####################################################### PREPARE PUPPETEER ############################################################################
     context.downloadSuccess = false;
     const browser = await puppeteer.launch({
@@ -49,8 +42,6 @@ async function processProduct(product, context) {
         args: ['--no-sandbox', '--disable-setuid-sandbox']
 
     });
-
-
     const page = await browser.newPage();
     await page.setViewport({
         width: 1200,
@@ -58,29 +49,18 @@ async function processProduct(product, context) {
         deviceScaleFactor: 1,
     });
     //######################################## Login in to Amazon and get the affiliate link ###########################################################
-
     const { sanitizedProductName, productDetails } = await loginToAmazon(page, product);
-
-    console.log("CHECK SANIZITIZED PRODUCT NAME: ", sanitizedProductName);
-
-
     //############################################################### SHORT GPT CONTROLLER ###############################################################
     console.log("##########################  Starting ShortGPT ############################")
     console.log("Look for out in the folder 'shortGPT' for screenshots of the process")
-
     await page.goto('http://localhost:31415/');
-
     await createAffiliateVideo(page, productDetails);
-
     const downloadPath = await downloadAffiliateVideo(page, sanitizedProductName);
-
-    console.log("downloadPath created: ", downloadPath);
-    console.log("passing proccesed productDetails to fetchChatCompletions  ", productDetails);
-    //#########PREPARE YOUTUBE SCRIPT (Title, Content, Tags) AND UPLOAD IT ############################################################################
-    await fetchChatCompletions(productDetails, downloadPath).catch(console.error);
+    //#########PREPARE YOUTUBE SCRIPT (Title, Content, Tags) WITH OPENAI AND UPLOAD IT TO YOUTUBE ############################################################################
+    await fetchChatCompletions(productDetails, downloadPath)
+        .then(() => context.downloadSuccess = true) // Set to true only if fetchChatCompletions succeeds
+        .catch(console.error);
 }
-
-
 
 
 
@@ -88,11 +68,18 @@ async function processProduct(product, context) {
 
 // ####################################################### MAIN SCRIPT ############################################################################
 /// this script should upload 5 affiliate videos to youtube and then pause for 24 hours and 5 minuztes 
-
-
-
-
 (async () => {
+
+
+    console.log("\u001b[0;34m###########################################");
+    console.log("# WEB AI AGENT RPA by \u001b[0;31mHadadadebadada\u001b[0m #");
+    console.log("\u001b[0;34m###########################################");
+    
+    // Example usage in a terminal-like environment (not directly applicable in web console)
+    console.log("\u001b[0;34mIf you're reading this, you've been in a coma for almost 20 years now. We're trying a new technique. We don't know where this message will end up in your dream, but we hope it works. Please wake up, we miss you.\u001b[0m");
+    console.log("\u001b[0;31mRoses are red\u001b[0m, violets are \u001b[0;34mblue. Hope you enjoy terminal hue\u001b[0m");
+
+
     const nicheName = process.argv[2]; // Get the niche name from the command line
     const products = await generateProductSuggestions(nicheName); // Generate products
     const context = { downloadSuccess: false };
@@ -103,16 +90,17 @@ async function processProduct(product, context) {
         try {
             console.log(`Processing: ${product}`);
             await processProduct(product, context);
+
+
             if (context.downloadSuccess) {
                 console.log(`Download successful for ${product}`);
                 successfulRuns++;
 
-                if (successfulRuns === 2) { // 1 for test purposes, 5 for real
+                if (successfulRuns === 5) { // 1 for test purposes, 5 for real
                     console.log("Pausing script after 2 successful runs");
                     // Wait for 24 hours and 5 minutes (86,700,000 milliseconds)
                     //                   await new Promise(resolve => setTimeout(resolve, 86700000));
-                    await new Promise(resolve => setTimeout(resolve, 25000));
-
+                    await new Promise(resolve => setTimeout(resolve, 86700000));
                     console.log("Resuming script after 24 hours and 5 minutes");
                     successfulRuns = 0; // Reset successful runs counter if you want to pause again after next 5 runs
                 }

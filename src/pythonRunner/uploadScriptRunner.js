@@ -26,6 +26,7 @@ const { spawn } = require('child_process');
     });
 
     pythonProcess.stderr.on('data', (data) => {
+        console.log("whats up with this error")
         console.error(`stderr: ${data}`);
     });
 

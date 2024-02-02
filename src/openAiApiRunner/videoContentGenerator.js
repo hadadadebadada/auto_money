@@ -18,7 +18,8 @@ const { spawn } = require('child_process');
 
 function runPythonScript(script, args) {
     // Path to the Python interpreter in the virtual environment
-    const venvPythonPath = '/home/brate/Dev/Scrape-anything---Web-AI-agent/youtubeEnv/bin/python';
+    
+    const venvPythonPath = path.resolve(__dirname, '../../', 'youtubeEnv', 'bin', 'python');
 
     console.log(`Running Python script with virtual environment: ${script}`);
     console.log("Arguments:", args);
@@ -29,6 +30,8 @@ function runPythonScript(script, args) {
         console.log(`stdout: ${data}`);
     });
 
+
+    // TODO: check why this error is happening but file is still uploaded 
     pythonProcess.stderr.on('data', (data) => {
         console.error(`stderr: ${data}`);
     });
@@ -91,13 +94,11 @@ async function fetchChatCompletions(productDetails, downloadPath) {
 
 
 
-    const script = "../../../upload_video.py";
-    runPythonScript(script, args);
 
 
     console.log("second try to call the script")
-    const script2 = "/home/brate/Dev/clean_youtube_uploader (copy)/upload_video.py";
-    runPythonScript(script2, args);
+    const scriptPath = path.resolve(__dirname, '../../', 'upload_video.py');
+    runPythonScript(scriptPath, args);
 
 
 }

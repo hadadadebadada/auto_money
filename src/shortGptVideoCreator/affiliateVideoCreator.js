@@ -63,12 +63,7 @@
         await page.waitForTimeout(5000); // Wait for 5 seconds
         await page.screenshot({ path: 'shortGPT/4_English.jpg', fullPage: true });
 
-
-
-
         const productDetailsString = JSON.stringify(productDetails);
-
-        console.log("productDetails: ", productDetails)
         // Typing the story command
         console.log(`4..... generating story for  ${productDetailsString}: `)
 
