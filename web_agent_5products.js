@@ -77,7 +77,6 @@ async function processProduct(product, context) {
     
     // Example usage in a terminal-like environment (not directly applicable in web console)
     console.log("\u001b[0;34mIf you're reading this, you've been in a coma for almost 20 years now. We're trying a new technique. We don't know where this message will end up in your dream, but we hope it works. Please wake up, we miss you.\u001b[0m");
-    console.log("\u001b[0;31mRoses are red\u001b[0m, violets are \u001b[0;34mblue. Hope you enjoy terminal hue\u001b[0m");
 
 
     const nicheName = process.argv[2]; // Get the niche name from the command line
