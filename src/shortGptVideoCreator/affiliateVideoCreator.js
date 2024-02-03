@@ -24,7 +24,7 @@
         await page.waitForXPath(clickXPath, { timeout: 10000 });
     } catch (error) {
         await page.screenshot({ path: 'shortGPT/2_clicked.jpg', fullPage: true });
-        throw new Error('ShortGPT Stock Video Option not found');
+        throw new Error('\u001b[0;31mShortGPT Stock Video Option not found');
     }
 
     const clickElements = await page.$x(clickXPath);
@@ -78,7 +78,7 @@
         await page.waitForTimeout(5000); // Wait for 5 seconds
         await page.screenshot({ path: 'shortGPT/5.3_story.jpg', fullPage: true });
     } else {
-        console.log("Error")
+        console.log("\u001b[0;31mError: text area not found in createAffiliateVideo function.")
         throw new Error('Textarea not found');
     }
 

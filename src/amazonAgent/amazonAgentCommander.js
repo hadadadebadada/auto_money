@@ -143,7 +143,7 @@ async function loginToAmazon(page, product) {
             document.querySelector("#amzn-ss-text-link > span > strong > a").click();
         });
     } catch (error) {
-        console.error('Error while clicking element3:', error.message);
+        console.error('\u001b[0;31mError while clicking element3:', error.message);
     }
     await page.waitForTimeout(5000);
     // await page.screenshot({ path: `productInformation/${sanitizedProductName}/affiliate05.png` });
@@ -156,7 +156,7 @@ async function loginToAmazon(page, product) {
         const popoverSelector = 'div.a-popover.a-popover-has-header.a-declarative.a-arrow-bottom';
         await page.waitForSelector(popoverSelector);
     } catch (error) {
-        console.log(error)
+        console.log("\u001b[0;31mAffiliate Popover not found: " + error)
     }
 
     //------------------------------------------------- get the link -----------------------------------------------------------------------

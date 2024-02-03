@@ -142,7 +142,7 @@ async function useAiAgent(command, page) {
 
                 if (exact || partial) {
                     const [response] = await Promise.all([
-                        page.waitForNavigation({ waitUntil: 'domcontentloaded' }).catch(e => console.log("Navigation timeout/error:", e.message)),
+                        page.waitForNavigation({ waitUntil: 'domcontentloaded' }).catch(e => console.log("\u001b[0;31mNavigation timeout/error:", e.message)),
                         (exact || partial).click()
                     ]);
 
@@ -165,11 +165,11 @@ async function useAiAgent(command, page) {
                     throw new Error("Can't find link");
                 }
             } catch (error) {
-                console.log("ERROR: Clicking failed", error);
+                console.log("\u001b[0;31mERROR: Clicking failed", error);
 
                 messages.push({
                     "role": "user",
-                    "content": "ERROR: I was unable to click that element",
+                    "content": "\u001b[0;31mERROR: I was unable to click that element",
                 });
             }
 

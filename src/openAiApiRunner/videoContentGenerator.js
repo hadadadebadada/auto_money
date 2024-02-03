@@ -2,7 +2,7 @@ const OpenAI = require('openai');
 const openai = new OpenAI();
 const { trimTitle } = require('../utils/trimTitle.js');
 const { spawn } = require('child_process');
-
+const path = require('path');
 
 
 /**
@@ -17,29 +17,32 @@ const { spawn } = require('child_process');
  */
 
 function runPythonScript(script, args) {
-    // Path to the Python interpreter in the virtual environment
-    
-    const venvPythonPath = path.resolve(__dirname, '../../', 'youtubeEnv', 'bin', 'python');
+    return new Promise((resolve, reject) => {
+        const venvPythonPath = path.resolve(__dirname, '../../', 'youtubeEnv', 'bin', 'python');
+        console.log(`Running Python script with virtual environment: ${script}`);
+        console.log("Arguments:", args);
 
-    console.log(`Running Python script with virtual environment: ${script}`);
-    console.log("Arguments:", args);
+        const pythonProcess = spawn(venvPythonPath, [script, ...args]);
 
-    const pythonProcess = spawn(venvPythonPath, [script, ...args]);
+        pythonProcess.stdout.on('data', (data) => {
+            console.log(`stdout: ${data}`);
+        });
 
-    pythonProcess.stdout.on('data', (data) => {
-        console.log(`stdout: ${data}`);
-    });
+        pythonProcess.stderr.on('data', (data) => {
+            console.error(`\u001b[0;31mstderr: ${data}`);
+        });
 
-
-    // TODO: check why this error is happening but file is still uploaded 
-    pythonProcess.stderr.on('data', (data) => {
-        console.error(`stderr: ${data}`);
-    });
-
-    pythonProcess.on('close', (code) => {
-        console.log(`child process exited with code ${code}`);
+        pythonProcess.on('close', (code) => {
+            console.log(`child process exited with code: ${code}`);
+            if (code === 0) {
+                resolve();
+            } else {
+                reject(new Error(`\u001b[0;31mPython script exited with code: ${code}`));
+            }
+        });
     });
 }
+
 /**
  * Fetches generated content for a YouTube video's description and tags based on product details.
  * This function utilizes the OpenAI API to generate a video description and tags that highlight
@@ -53,7 +56,7 @@ function runPythonScript(script, args) {
  * @param {string} downloadPath - The file path where the video for upload is located.
  */
 
-async function fetchChatCompletions(productDetails, downloadPath) {
+async function fetchChatCompletions(productDetails, downloadPath, context) {
 
 
     let promptTemplate = "Assume you are a marketing expert specializing in YouTube short videos. Your role involves understanding and leveraging psychological principles to enhance viewer engagement and retention. Discuss strategies for creating captivating YouTube shorts, focusing on psychological aspects such as the attention span of viewers, the role of emotions in content engagement, and the use of storytelling to make content more relatable and memorable. Provide insights on how these psychological elements can be applied to different genres of content, like educational, entertainment, and lifestyle. Also, include tips on optimizing video titles and descriptions for maximum impact and viewer curiosity. Finally, address the importance of understanding audience demographics and preferences to tailor content effectively."
@@ -92,15 +95,10 @@ async function fetchChatCompletions(productDetails, downloadPath) {
         '--privacyStatus=public'
     ];
 
-
-
-
-
-    console.log("second try to call the script")
+    console.log("Uploading video to Youtube...")
     const scriptPath = path.resolve(__dirname, '../../', 'upload_video.py');
     runPythonScript(scriptPath, args);
-
-
+     
 }
 
 module.exports = { fetchChatCompletions };

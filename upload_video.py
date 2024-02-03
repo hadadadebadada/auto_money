@@ -135,12 +135,17 @@ def resumable_upload(insert_request):
       if response is not None:
         if 'id' in response:
           print "Video id '%s' was successfully uploaded." % response['id']
+          sys.exit(0)  # Exit indicating success
+
         else:
           exit("The upload failed with an unexpected response: %s" % response)
+          sys.exit(1)  # Exit indicating a failure
     except HttpError, e:
       if e.resp.status in RETRIABLE_STATUS_CODES:
         error = "A retriable HTTP error %d occurred:\n%s" % (e.resp.status,
                                                              e.content)
+        sys.exit(e.resp.status)  # Exit with the HTTP error status code
+
       else:
         raise
     except RETRIABLE_EXCEPTIONS, e:
@@ -173,6 +178,8 @@ if __name__ == '__main__':
 
   if not os.path.exists(args.file):
     exit("Please specify a valid file using the --file= parameter.")
+    sys.exit(2)  # Choose an appropriate exit code for this error
+
 
   youtube = get_authenticated_service(args)
   try:

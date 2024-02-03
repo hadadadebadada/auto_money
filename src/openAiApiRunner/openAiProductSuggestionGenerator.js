@@ -29,7 +29,7 @@ async function generateAiProductSuggestions(nicheName) {
         console.log("productsResponse1", productsResponse.choices[0].message.content)
 
         if (!productsResponse || !productsResponse.choices) {
-            console.error('Invalid response from API:', productsResponse);
+            console.error('\u001b[0;31mInvalid response from API:', productsResponse);
             return [];
         }
 
@@ -37,7 +37,7 @@ async function generateAiProductSuggestions(nicheName) {
         const messageContent = productsResponse.choices[0].message.content;
 
         if (!messageContent) {
-            console.error('No content in response:', productsResponse);
+            console.error('\u001b[0;31mNo content in response:', productsResponse);
             return [];
         }
 
@@ -49,7 +49,7 @@ async function generateAiProductSuggestions(nicheName) {
 
         return products.filter(product => product.trim() !== ''); // Filter out empty lines
     } catch (error) {
-        console.error('Error calling OpenAI API:', error);
+        console.error('\u001b[0;31mError calling OpenAI API:', error);
         return [];
     }
 }

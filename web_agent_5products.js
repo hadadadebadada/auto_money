@@ -57,9 +57,18 @@ async function processProduct(product, context) {
     await createAffiliateVideo(page, productDetails);
     const downloadPath = await downloadAffiliateVideo(page, sanitizedProductName);
     //#########PREPARE YOUTUBE SCRIPT (Title, Content, Tags) WITH OPENAI AND UPLOAD IT TO YOUTUBE ############################################################################
+    console.log("########################## Uploading affiliate video to YouTube ############################")
+
     await fetchChatCompletions(productDetails, downloadPath)
-        .then(() => context.downloadSuccess = true) // Set to true only if fetchChatCompletions succeeds
-        .catch(console.error);
+    .then(() => {
+        context.downloadSuccess = true; // This is now correctly set based on the Python script's result
+        console.log("finishing with context.downloadSuccess: ", context.downloadSuccess);
+    })
+    .catch((error) => {
+        console.error(`\u001b[0;31mError setting downloadSucess: ${error}`);
+        context.downloadSuccess = false; // Ensure to handle the failure case
+    });
+
 }
 
 
@@ -68,15 +77,18 @@ async function processProduct(product, context) {
 
 // ####################################################### MAIN SCRIPT ############################################################################
 /// this script should upload 5 affiliate videos to youtube and then pause for 24 hours and 5 minuztes 
+
+
+
 (async () => {
 
 
-    console.log("\u001b[0;34m###########################################");
-    console.log("# WEB AI AGENT RPA by \u001b[0;31mHadadadebadada\u001b[0m #");
-    console.log("\u001b[0;34m###########################################");
-    
-    // Example usage in a terminal-like environment (not directly applicable in web console)
-    console.log("\u001b[0;34mIf you're reading this, you've been in a coma for almost 20 years now. We're trying a new technique. We don't know where this message will end up in your dream, but we hope it works. Please wake up, we miss you.\u001b[0m");
+console.log("\u001b[0;31m###########################################\u001b[0m"); // Red
+console.log("\u001b[0;32m# WEB AI AGENT RPA by \u001b[0;33mHadadadebadada\u001b[0;32m #\u001b[0m"); // Green with the name in Yellow
+console.log("\u001b[0;31m###########################################\u001b[0m"); // Red
+
+//console.log("\u001b[0;35mIf you're reading this, \u001b[0;36myou've been in a coma for almost 20 years now. \u001b[0;31mWe're trying a new technique. \u001b[0;32mWe don't know where this message will end up in your dream, \u001b[0;33mbut we hope it works. \u001b[0;34mPlease wake up, \u001b[0;35mwe miss you.\u001b[0m");
+
 
 
     const nicheName = process.argv[2]; // Get the niche name from the command line
@@ -84,39 +96,29 @@ async function processProduct(product, context) {
     const context = { downloadSuccess: false };
     let successfulRuns = 0; // Counter for successful runs
 
-
     for (const product of products) {
         try {
             console.log(`Processing: ${product}`);
             await processProduct(product, context);
-
-
             if (context.downloadSuccess) {
-                console.log(`Download successful for ${product}`);
                 successfulRuns++;
-
-                if (successfulRuns === 5) { // 1 for test purposes, 5 for real
-                    console.log("Pausing script after 2 successful runs");
+                console.log("Downloaded Video! Uploading to Youtube and Continuing to next product...")
+                if (successfulRuns === 5) {
+                    console.log("Pausing script after 5 successful runs");
                     // Wait for 24 hours and 5 minutes (86,700,000 milliseconds)
-                    //                   await new Promise(resolve => setTimeout(resolve, 86700000));
                     await new Promise(resolve => setTimeout(resolve, 86700000));
                     console.log("Resuming script after 24 hours and 5 minutes");
                     successfulRuns = 0; // Reset successful runs counter if you want to pause again after next 5 runs
                 }
             } else {
-                console.log(`Download failed for ${product}`);
+                console.log(`\u001b[0;31mDownload failed for ${product}`);
             }
         } catch (error) {
-            console.error(`Error processing product ${product}:`, error);
+            console.error(`\u001b[0;31mError processing product ${product}:`, error);
             continue;
         }
     }
 })();
-
-
-
-
-
 
 
 

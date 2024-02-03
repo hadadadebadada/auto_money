@@ -24,16 +24,13 @@ function trimTitleToMaxLength(title, maxLength) {
  */
 function runPythonScript(script, folderPath) {
 
-    console.log("\u001b[0;34m###########################################");
-    console.log("# WEB AI AGENT RPA by \u001b[0;31mHadadadebadada\u001b[0m #");
-    console.log("\u001b[0;34m###########################################");
+    console.log("\u001b[0;31m###########################################\u001b[0m"); // Red
+    console.log("\u001b[0;32m# WEB AI AGENT RPA by \u001b[0;33mHadadadebadada\u001b[0;32m #\u001b[0m"); // Green with the name in Yellow
+    console.log("\u001b[0;31m###########################################\u001b[0m"); // Red
     
     // Example usage in a terminal-like environment (not directly applicable in web console)
-    console.log("\u001b[0;34mIf you're reading this, you've been in a coma for almost 20 years now. We're trying a new technique. We don't know where this message will end up in your dream, but we hope it works. Please wake up, we miss you.\u001b[0m");
-
-
-
-
+    console.log("\u001b[0;35mIf you're reading this, \u001b[0;36myou've been in a coma for almost 20 years now. \u001b[0;31mWe're trying a new technique. \u001b[0;32mWe don't know where this message will end up in your dream, \u001b[0;33mbut we hope it works. \u001b[0;34mPlease wake up, \u001b[0;35mwe miss you.\u001b[0m");
+    
 
     // Read the JSON file
     const jsonFilePath = path.join(folderPath, 'productDetails.json');
@@ -44,7 +41,7 @@ function runPythonScript(script, folderPath) {
     const videoFile = files.find(file => file.endsWith('.mp4'));
 
     if (!videoFile) {
-        console.error('No .mp4 file found in the folder');
+        console.error('\u001b[0;31mNo .mp4 file found in the folder');
         return;
     }
 

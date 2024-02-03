@@ -47,7 +47,7 @@ const search = new SerpApi.GoogleSearch(process.env.SERP_API_KEY);
 
         return products.filter(product => product.trim() !== ''); // Filter out empty lines
     } catch (error) {
-        console.error('Error calling SerpApi:', error);
+        console.error('\u001b[0;31mError calling SerpApi:', error);
         return [];
     }
 }

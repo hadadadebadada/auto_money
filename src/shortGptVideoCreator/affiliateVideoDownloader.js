@@ -15,7 +15,7 @@ const {waitForDownloadButton} = require('./downloadButtonWaiter');
  * @returns {Promise<string>} The path where the video is downloaded. Returns a string indicating the path, or 'noneDownloadPath' if the download did not occur.
  * 
  * @example
- * // Assume page is a Puppeteer Page object and sanitizedProductName is "myProduct_2023".
+ *  Assume page is a Puppeteer Page object and sanitizedProductName is "myProduct_2023".
  * downloadAffiliateVideo(page, "myProduct_2023").then(downloadPath => {
  *   console.log(downloadPath); // Logs the path where the video is saved.
  * });
@@ -23,7 +23,6 @@ const {waitForDownloadButton} = require('./downloadButtonWaiter');
 async function downloadAffiliateVideo(page, sanitizedProductName){
 
 
-        console.log("received sanitizedProductName: ", sanitizedProductName)
 
         let downloadPath = "noneDownloadPath"; // This will be modified within your function
         //####################################################### DOWNLOAD THE VIDEO ############################################################################
@@ -61,7 +60,7 @@ async function downloadAffiliateVideo(page, sanitizedProductName){
                     });
                 }).on('error', function (err) {
                     fs.unlink(downloadPath); // Delete the file on error
-                    console.log('Error during download:', err.message);
+                    console.log('\u001b[0;31mError during download:', err.message);
                 });
             } else {
                 console.log('Video source not found');
