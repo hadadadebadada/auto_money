@@ -6,13 +6,14 @@ Prerequisites
 Before you begin, ensure you have met the following requirements:
 
     You have a working installation of Node.js and npm.
-    You have a basic understanding of Node.js and JavaScript.
+    You have Python 2 installed and are familiar with setting up virtual environments.
+    You have a basic understanding of Node.js, JavaScript, and Python.
 
 Step 1: Setting up the Environment Variables
 
 Create a .env file in the root directory of your project and include the following environment variables:
 
-    
+
     OPENAI_API_KEY=your_openai_api_key_here
     AMNZ_EMAIL=your_amazon_email_here
     AMNZ_PW=your_amazon_password_here
@@ -34,32 +35,54 @@ To upload videos to YouTube via this project, you need to set up client_secrets.
     Place client_secrets.json in your project's root directory.
 
 For a more detailed guide, follow the instructions on Uploading a Video.
-Step 3: Running an Instance of ShortGPT
+Step 3: Preparing Python 2 Environment for YouTube Uploads
+
+This project uses a Python 2 script for uploading videos to YouTube. Follow these steps to prepare your Python environment:
+
+Ensure Python 2 is installed on your system. You can download it from the official Python website.
+
+Create a virtual environment for Python 2:
+
+
+    python2 -m virtualenv env
+    
+    Activate the virtual environment:
+
+On Windows:
+
+    .\env\Scripts\activate
+
+On Unix or MacOS:
+
+
+    source env/bin/activate
+
+    Install the necessary Python 2 dependencies within the virtual environment as specified in your project's requirements file.
+
+Step 4: Running an Instance of ShortGPT
 
 This project requires a running instance of ShortGPT. To set it up:
 
-    Clone the ShortGPT repository from GitHub:
+Clone the ShortGPT repository from GitHub:
 
-    bash
 
-git clone https://github.com/RayVentura/ShortGPT.git
-
-Navigate into the cloned directory:
-
-bash
+    
+    git clone https://github.com/RayVentura/ShortGPT.git
+    
+    Navigate into the cloned directory:
 
     cd ShortGPT
 
-    Follow the setup instructions provided in the ShortGPT README to get the service running.
+Follow the setup instructions provided in the ShortGPT README to get the service running.
 
 Starting the Project
 
 After completing the setup steps, you can start the project by running:
 
-bash
 
-npm install
-npm start
+
+    npm install
+    npm start
 
 This will install all required dependencies and start the application.
 Contributing
