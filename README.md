@@ -90,10 +90,6 @@ docker save short_gpt_docker > short_gpt_docker.tar
 This will install all required dependencies and start the application.
 Contributing
 
-Contributions are welcome! For major changes, please open an issue first to discuss what you would like to change.
-License
-
-Include your project's license information here.
 
 ## Step 4: Start the Script
 
