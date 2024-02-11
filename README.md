@@ -71,12 +71,21 @@ bash
 
 Follow the setup instructions provided in the ShortGPT README to get the service running.
 
-Starting the Project
+To run Dockerfile do this:
+```bash
+docker build -t short_gpt_docker_new:latest .
+docker run -p 31415:31415 --env-file .env short_gpt_docker_new:latest
+```
+Export Docker image:
+```bash
+docker save short_gpt_docker > short_gpt_docker.tar
+```
 
-After completing the setup steps, you can start the project by running:
+> ***Note:*** *You need also an .env with with following variables for ShortGPT!*
 
-    npm install
-    npm start
+    OPENAI_API_KEY=your_openai_api_key_here
+    ELEVENLABS_API_KEY=your_elevenlabs_api_key_here
+    PEXELS_API_KEY=your_pexels_api_key
 
 This will install all required dependencies and start the application.
 Contributing
