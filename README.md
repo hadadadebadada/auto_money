@@ -18,6 +18,7 @@ Create a .env file in the root directory of your project and include the followi
     SERP_API_KEY=your_serp_api_key_here
 
 Replace the placeholders with your actual API keys and credentials.
+Note: You need to sign for the amazon affiliate programm to be able to receive affiliate links! 
 # Step 2: Configuring YouTube API for Video Uploads
 
 To upload videos to YouTube via this project, you need to set up client_secrets.json in the /src folder:
