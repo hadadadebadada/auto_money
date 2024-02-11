@@ -5,15 +5,13 @@ Prerequisites
 
 Before you begin, ensure you have met the following requirements:
 
-    You have a working installation of Node.js and npm.
-    You have Python 2 installed and are familiar with setting up virtual environments.
-    You have a basic understanding of Node.js, JavaScript, and Python.
+You have a working installation of Node.js and npm.
+You have a basic understanding of Node.js and JavaScript.
 
 Step 1: Setting up the Environment Variables
 
 Create a .env file in the root directory of your project and include the following environment variables:
-
-
+    
     OPENAI_API_KEY=your_openai_api_key_here
     AMNZ_EMAIL=your_amazon_email_here
     AMNZ_PW=your_amazon_password_here
@@ -22,31 +20,25 @@ Create a .env file in the root directory of your project and include the followi
 Replace the placeholders with your actual API keys and credentials.
 Step 2: Configuring YouTube API for Video Uploads
 
-To upload videos to YouTube via this project, you need to set up client_secrets.json:
+To upload videos to YouTube via this project, you need to set up client_secrets.json in the /src folder:
 
-    Visit the Google Cloud Console.
-    Create a new project or select an existing one.
-    Navigate to the APIs & Services > Credentials page.
-    Click Create credentials and choose OAuth client ID.
-    If prompted, configure the OAuth consent screen.
-    Select Desktop app as the application type.
-    Name your OAuth 2.0 client and click Create.
-    Download the JSON configuration file and rename it to client_secrets.json.
-    Place client_secrets.json in your project's root directory.
-
-For a more detailed guide, follow the instructions on Uploading a Video.
-Step 3: Preparing Python 2 Environment for YouTube Uploads
-
-This project uses a Python 2 script for uploading videos to YouTube. Follow these steps to prepare your Python environment:
+Visit the Google Cloud Console.
+Create a new project or select an existing one.
+Navigate to the APIs & Services > Credentials page.
+Click Create credentials and choose OAuth client ID.
+If prompted, configure the OAuth consent screen.
+Select Desktop app as the application type.
+Name your OAuth 2.0 client and click Create.
+Download the JSON configuration file and rename it to client_secrets.json.
+Place client_secrets.json in your project's root directory.
 
 Ensure Python 2 is installed on your system. You can download it from the official Python website.
 
 Create a virtual environment for Python 2:
 
-
     python2 -m virtualenv env
-    
-    Activate the virtual environment:
+
+Activate the virtual environment:
 
 On Windows:
 
@@ -54,22 +46,23 @@ On Windows:
 
 On Unix or MacOS:
 
-
     source env/bin/activate
 
-    Install the necessary Python 2 dependencies within the virtual environment as specified in your project's requirements file.
+Install the necessary Python 2 dependencies within the virtual environment as specified in your project's requirements file.
 
-Step 4: Running an Instance of ShortGPT
+For a more detailed guide, follow the instructions on Uploading a Video.
+Step 3: Running an Instance of ShortGPT
 
 This project requires a running instance of ShortGPT. To set it up:
 
 Clone the ShortGPT repository from GitHub:
 
 
-    
     git clone https://github.com/RayVentura/ShortGPT.git
-    
-    Navigate into the cloned directory:
+
+Navigate into the cloned directory:
+
+bash
 
     cd ShortGPT
 
@@ -78,8 +71,6 @@ Follow the setup instructions provided in the ShortGPT README to get the service
 Starting the Project
 
 After completing the setup steps, you can start the project by running:
-
-
 
     npm install
     npm start
