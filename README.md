@@ -8,7 +8,7 @@ Before you begin, ensure you have met the following requirements:
 You have a working installation of Node.js and npm.
 You have a basic understanding of Node.js and JavaScript.
 
-##Step 1: Setting up the Environment Variables
+#Step 1: Setting up the Environment Variables
 
 Create a .env file in the root directory of your project and include the following environment variables:
     
