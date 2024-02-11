@@ -12,12 +12,11 @@ Step 1: Setting up the Environment Variables
 
 Create a .env file in the root directory of your project and include the following environment variables:
 
-bash
-
-OPENAI_API_KEY=your_openai_api_key_here
-AMNZ_EMAIL=your_amazon_email_here
-AMNZ_PW=your_amazon_password_here
-SERP_API_KEY=your_serp_api_key_here
+    
+    OPENAI_API_KEY=your_openai_api_key_here
+    AMNZ_EMAIL=your_amazon_email_here
+    AMNZ_PW=your_amazon_password_here
+    SERP_API_KEY=your_serp_api_key_here
 
 Replace the placeholders with your actual API keys and credentials.
 Step 2: Configuring YouTube API for Video Uploads
