@@ -12,7 +12,7 @@ Step 1: Setting up the Environment Variables
 
 Create a .env file in the root directory of your project and include the following environment variables:
 
-plaintext
+bash
 
 OPENAI_API_KEY=your_openai_api_key_here
 AMNZ_EMAIL=your_amazon_email_here
