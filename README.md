@@ -89,14 +89,12 @@ To begin processing and uploading videos related to your specified niche, start 
 
 To start the script, use the following command in your terminal or command prompt, replacing `"nicheName"` with the actual name of your niche. The niche name is used for searching relevant products on Google:
 
-```bash
-node web_agent_5products.js "nicheName"
+
+    node web_agent_5products.js "nicheName"
 
 For example, if your niche is "organic teas," you would start the script like this:
 
-bash
-
-node web_agent_5products.js "organic teas"
+    node web_agent_5products.js "organic teas"
 
 This command initiates the process of gathering information on 5 products within the "organic teas" niche, preparing content for them, and uploading the related videos to YouTube, adhering to the daily upload limit imposed by the YouTube API.
 
